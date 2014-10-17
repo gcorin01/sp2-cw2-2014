@@ -13,4 +13,9 @@ public class Fraction {
         // TODO Auto-generated constructor stub
     }
 
+    public int divide(int i) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
 }

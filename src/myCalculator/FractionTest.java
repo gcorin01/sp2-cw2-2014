@@ -15,11 +15,17 @@ public class FractionTest {
 
     @Test
     public void test() {
-        Fraction addObj = new Fraction();
-        
+
+        int expectedOutput = 9;
+
+        Fraction addObj = new Fraction(1, 0);
+
         // test divide by zero - should print an error and exit
-        new Fraction(1, 0);
-        // test multiply
+        int actualOutput = addObj.divide(0);
+
+        fail("Not yet implemented");
+
     }
+        // test multiply
 
 }
