@@ -26,8 +26,8 @@ public class FractionTest {
     @Test
     public void testMethodDivide() {
         
-        int numberator = 1;
-        int denomiator = 2;
+        int numberator = 0;
+        int denomiator = 1;
 
         Fraction fraction = new Fraction(numberator, denomiator);  
         
@@ -36,14 +36,60 @@ public class FractionTest {
 
 
     @Test
-    public void testMethodMultiply() {
-        equals(new Fraction(1, 2));
-        multiply(new Fraction(3, 5);
-    }
-
-
-    private void multiply(Fraction fraction) {
-        // TODO Auto-generated method stub
+    public void testMethodEquals() {
         
+        assert (new Fraction(1, 2).equals(new Fraction(1, 2))) : "testMethodEquals() - Fractions not equal";
     }
+
+
+    @Test
+    public void testMethodEquals1() {
+        
+        assert (new Fraction(3, 6).equals(new Fraction(3, 6))) : "testMethodEquals1() - Fractions not equal";
+    }
+
+    
+    
+    @Test
+    public void testMethodEquals2() {
+        
+        assert (new Fraction(-1, 2).equals(new Fraction(-1, 2))) : "testMethodEquals2() - Fractions not equal";
+    }
+
+    
+    
+    @Test
+    public void testMethodEquals3() {
+        
+        assert (new Fraction(1, -2).equals(new Fraction(1, -2))) : "testMethodEquals3() - Fractions not equal";
+    }
+
+
+
+    @Test
+    public void testMethodMultiply() {
+        
+        Fraction expectedOutcome = new Fraction(3, 10);
+        
+        Fraction fraction1 = new Fraction(1, 2);
+        
+        Fraction fraction2 = new Fraction(3, 5);
+        
+        Fraction multiplicationResult = new Fraction(0, 0);
+        
+        multiplicationResult = fraction1.multiply(fraction2);
+        
+        assert expectedOutcome.equals(multiplicationResult) : "testMethodMultiply() - Unexpected Fraction multiplication outcome";
+    }
+    
+    
+    @Test
+    public void testMethodMultiply1() { 
+
+        assert ((new Fraction(3, 10)).equals(new Fraction(1, 2).multiply(new Fraction(3, 5)))) : "testMethodMultiply1() - Fraction not equal after multiplication ";
+    }
+    
+    
+    
 }
+
