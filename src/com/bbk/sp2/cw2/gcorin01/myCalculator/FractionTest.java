@@ -24,18 +24,18 @@ public class FractionTest {
 
     @Before
     public void setUpFraction() {
-        numerator = 1;
-        denominator = 3;
+        numerator = 64;
+        denominator = 1024;
 
         fraction = new Fraction(numerator, denominator);
     }
 
     @Test
     public void testMethodGetNumerator() {
-        int expectedNumerator = 1;
+        int expectedNumerator = 1024;
 
         assertEquals("testMethodGetNumerator() - Unexpected numerator value",
-                fraction.getNumerator(), expectedNumerator);
+                expectedNumerator, fraction.getNumerator());
     }
 
     @Test
@@ -53,20 +53,20 @@ public class FractionTest {
 
     @Test
     public void testMethodSetNumerator() {
-        int expectedNumerator = 1;
+        int expectedNumerator = 1024;
 
         assertEquals("testMethodSetNumerator() - Unexpected numerator value",
-                fraction.getNumerator(), expectedNumerator);
+                expectedNumerator, fraction.getNumerator());
 
     }
 
     @Test
     public void testMethodGetDenominator() {
-        int wrongDenominator = 3;
+        int expectedDenominator = 64;
 
         assertEquals(
                 "testMethodGetDenominator() - Unexpected denominator value",
-                fraction.getDenominator(), wrongDenominator);
+                expectedDenominator, fraction.getDenominator());
     }
 
     @Test
@@ -84,20 +84,22 @@ public class FractionTest {
 
     @Test
     public void testMethodSetDenominator() {
-        int expectedDenominator = 3;
+        int expectedDenominator = 64;
 
         assertEquals(
                 "testMethodSetDenominator() - Unexpected denominator value",
-                fraction.getDenominator(), expectedDenominator);
-
+                expectedDenominator, fraction.getDenominator());
     }
 
     @Test
     public void testMethodDivide() {
+        int expectedResult = 6;
         int divisionResult = fraction.divide(fraction);
+
+        assertEquals("testMethodDivide() - Unexpected division result",
+                expectedResult, divisionResult);
     }
-    
-    
+
     // add more divide tests to assert result
 
     @Test
@@ -133,7 +135,7 @@ public class FractionTest {
 
         Fraction fraction2 = new Fraction(3, 5);
 
-        Fraction multiplicationResult = new Fraction(0, 0);
+        Fraction multiplicationResult;
 
         multiplicationResult = fraction1.multiply(fraction2);
 
@@ -147,16 +149,23 @@ public class FractionTest {
                 .multiply(new Fraction(3, 5)))) : "testMethodMultiply1() - Fraction not equal after multiplication ";
     }
 
-    // @Test
-    // public void testMethodGreatestCommonDivisor() {
-    // int num1 = 8;
-    // int num2 = 12;
-    // int expectedOutcome = 4;
-    //
-    // Fraction fraction = new Fraction(num1, num2);
-    //
-    // assert ;
+    @Test
+    public void testMethodGreatestCommonDivisor() {
+        int expectedGcd = 4;
 
-    // }
+        assertEquals(
+                "testMethodGreatestCommonDivisor() - Unexpected gcd outcome",
+                expectedGcd, fraction.getGcd(numerator, denominator));
+    }
 
+    @Test
+    public void testMethodToString() {
+        String expectedOutcome = fraction.getNumerator() + "/"
+                + fraction.getDenominator();
+        String actualOutcome = fraction.toString();
+
+        assertEquals(
+                "testMethodToString() - Unexpected Fraction to string outcome",
+                expectedOutcome, actualOutcome);
+    }
 }

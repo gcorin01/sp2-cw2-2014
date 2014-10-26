@@ -12,8 +12,17 @@ public class Fraction {
     private int denominator;
 
     public Fraction(int num, int denum) {
-        setNumerator(num);
-        this.denominator = denum;
+        try {
+            @SuppressWarnings("unused")
+            int divisionResult = num / denum;
+        } catch (ArithmeticException e) {
+            System.out.println("Invalid fraction with denominator 0");
+        }
+        
+        int gcd = getGcd(num, denum);
+        
+        setNumerator(num / gcd);
+        setDenominator(denum / gcd);
     }
 
     /**
@@ -28,6 +37,7 @@ public class Fraction {
      * @return the numerator
      */
     public int getNumerator() {
+        
         return numerator;
     }
 
@@ -43,16 +53,13 @@ public class Fraction {
      * @return the denominator
      */
     public int getDenominator() {
+
         return denominator;
     }
 
     public int divide(Fraction fraction) {
-        int divisionResult = 0;
-        try {
-            divisionResult = this.numerator / this.denominator;
-        } catch (ArithmeticException e) {
-            System.out.println("Invalid fraction with denominator 0");
-        }
+        int divisionResult = this.numerator / this.denominator;
+
         return divisionResult;
     }
 
@@ -90,8 +97,23 @@ public class Fraction {
         return new Fraction(num, denom);
     }
 
-    public boolean getGcd(int num1, int num2) {
-        // TODO Auto-generated method stub
-        return false;
+    public int getGcd(int num1, int num2) {        
+        
+        while (num2 != 0) {
+            int tempGcd = num2;
+            num2 = num1 % num2;
+            num1 = tempGcd;
+        }
+        
+        return num1;
     }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return getNumerator() + "/" + getDenominator();
+    }
+    
 }
