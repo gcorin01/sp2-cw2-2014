@@ -91,8 +91,15 @@ public class Fraction {
     }
 
     public Fraction multiply(Fraction frac) {
-        int num = this.numerator * frac.numerator;
-        int denom = this.denominator * frac.denominator;
+        int num = 0;
+        int denom = 0;
+        
+        try {
+            num = this.numerator * frac.numerator;
+            denom = this.denominator * frac.denominator;
+        } catch (ArithmeticException e) {
+            System.out.println("The Multiplication result is  ether too big or too small to be displayed accuraterly.");
+        }
 
         return new Fraction(num, denom);
     }
@@ -114,6 +121,13 @@ public class Fraction {
     @Override
     public String toString() {
         return getNumerator() + "/" + getDenominator();
+    }
+
+    public int getLcm(int a, int b) {
+        if (a == 0 || b == 0) return 0;
+        int lcm = (a * b) / getGcd(a, b);
+          
+        return Math.abs(lcm);
     }
     
 }

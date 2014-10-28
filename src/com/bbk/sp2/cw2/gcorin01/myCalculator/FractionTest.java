@@ -32,7 +32,7 @@ public class FractionTest {
 
     @Test
     public void testMethodGetNumerator() {
-        int expectedNumerator = 1024;
+        int expectedNumerator = 1;
 
         assertEquals("testMethodGetNumerator() - Unexpected numerator value",
                 expectedNumerator, fraction.getNumerator());
@@ -53,7 +53,7 @@ public class FractionTest {
 
     @Test
     public void testMethodSetNumerator() {
-        int expectedNumerator = 1024;
+        int expectedNumerator = 1;
 
         assertEquals("testMethodSetNumerator() - Unexpected numerator value",
                 expectedNumerator, fraction.getNumerator());
@@ -62,7 +62,7 @@ public class FractionTest {
 
     @Test
     public void testMethodGetDenominator() {
-        int expectedDenominator = 64;
+        int expectedDenominator = 16;
 
         assertEquals(
                 "testMethodGetDenominator() - Unexpected denominator value",
@@ -84,7 +84,7 @@ public class FractionTest {
 
     @Test
     public void testMethodSetDenominator() {
-        int expectedDenominator = 64;
+        int expectedDenominator = 16;
 
         assertEquals(
                 "testMethodSetDenominator() - Unexpected denominator value",
@@ -93,7 +93,7 @@ public class FractionTest {
 
     @Test
     public void testMethodDivide() {
-        int expectedResult = 6;
+        int expectedResult = 0;
         int divisionResult = fraction.divide(fraction);
 
         assertEquals("testMethodDivide() - Unexpected division result",
@@ -151,7 +151,7 @@ public class FractionTest {
 
     @Test
     public void testMethodGreatestCommonDivisor() {
-        int expectedGcd = 4;
+        int expectedGcd = 64;
 
         assertEquals(
                 "testMethodGreatestCommonDivisor() - Unexpected gcd outcome",
@@ -168,4 +168,76 @@ public class FractionTest {
                 "testMethodToString() - Unexpected Fraction to string outcome",
                 expectedOutcome, actualOutcome);
     }
+
+    @Test
+    public void testMethodLeastCommonMultiplierWithPosNumb() {
+        int expectedOutcome = 15;
+        int a = 3;
+        int b = 15;
+        int lcm = fraction.getLcm(a, b);
+        
+        assertEquals("testMethodLeastCommonMultiplier() - Unexpected lcm outcome", expectedOutcome, lcm);
+    }
+    
+    
+    @Test
+    public void testMethodLeastCommonMultiplierWithNegNumb() {
+        int expectedOutcome = 15;
+        int a = -3;
+        int b = -15;
+        int lcm = fraction.getLcm(a, b);
+        
+        assertEquals("testMethodLeastCommonMultiplier() - Unexpected lcm outcome", expectedOutcome, lcm);
+    }
+    
+    @Test
+    public void testMethodLeastCommonMultiplierWithOneNegNumb() {
+        int expectedOutcome = 15;
+        int a = -3;
+        int b = 15;
+        int lcm = fraction.getLcm(a, b);
+        
+        assertEquals("testMethodLeastCommonMultiplier() - Unexpected lcm outcome", expectedOutcome, lcm);
+    }
+    
+    
+    @Test
+    public void testMethodLeastCommonMultiplierWithZero() {
+        int expectedOutcome = 0;
+        int a = 0;
+        int b = -15;
+        int lcm = fraction.getLcm(a, b);
+        
+        assertEquals("testMethodLeastCommonMultiplier() - Unexpected lcm outcome", expectedOutcome, lcm);
+    }
+    
+    @Test
+    public void testMethodLeastCommonMultiplierWithEqualNumbs() {
+        int expectedOutcome = 10000;
+        int a = 1000;
+        int b = 10000;
+        int lcm = fraction.getLcm(a, b);
+        
+        assertEquals("testMethodLeastCommonMultiplier() - Unexpected lcm outcome", expectedOutcome, lcm);
+    }
+    
+    @Test
+    public void testMethodLeastCommonMultiplierWithBigNumbs() {
+        int expectedOutcome = 10000;
+        int a = 214748364;
+        int b = 214748364;
+        int lcm = fraction.getLcm(a, b);
+        
+        assertEquals("testMethodLeastCommonMultiplier() - Unexpected lcm outcome", expectedOutcome, lcm);
+    }
+    
+    
+//    @Test
+//    public void testMethodAdd() {
+//        Fraction expectedOutcome = new Fraction(); 
+//        Fraction frac1 = new Fraction(3, 4);
+//        Fraction frac2 = new Fraction(2, 3);
+//        
+//        
+//    }
 }
