@@ -228,10 +228,10 @@ public class FractionTest {
 
     @Test
     public void testMethodLeastCommonMultiplierWithNegNumb() {
-        int expectedOutcome = 15;
+        int expectedOutcome = -15;
         int a = -3;
         int b = -15;
-        int lcm = fraction.getLcm(a, b);
+        int lcm = new Fraction(64, 1024).getLcm(a, b);
 
         assertEquals(
                 "testMethodLeastCommonMultiplier() - Unexpected lcm outcome",
@@ -299,9 +299,9 @@ public class FractionTest {
         int c = Integer.MAX_VALUE;
         int d = Integer.MAX_VALUE;
 
-       Fraction frac = new Fraction(a, b).add(new Fraction(c, d));
+        Fraction frac = new Fraction(a, b).add(new Fraction(c, d));
     }
-    
+
     @SuppressWarnings("unused")
     @Test(expected = ArithmeticException.class)
     public void testMethodAddDenominatorOverflow() {
@@ -310,7 +310,7 @@ public class FractionTest {
         int c = Integer.MAX_VALUE;
         int d = Integer.MAX_VALUE;
 
-       Fraction frac = new Fraction(a, b).add(new Fraction(c, d));
+        Fraction frac = new Fraction(a, b).add(new Fraction(c, d));
     }
 
     @SuppressWarnings("unused")
@@ -321,9 +321,9 @@ public class FractionTest {
         int c = Integer.MIN_VALUE;
         int d = Integer.MIN_VALUE;
 
-       Fraction frac = new Fraction(a, b).add(new Fraction(c, d));
+        Fraction frac = new Fraction(a, b).add(new Fraction(c, d));
     }
-    
+
     @SuppressWarnings("unused")
     @Test(expected = ArithmeticException.class)
     public void testMethodAdddenominatorUnderflow() {
@@ -332,6 +332,58 @@ public class FractionTest {
         int c = Integer.MIN_VALUE;
         int d = Integer.MIN_VALUE;
 
-       Fraction frac = new Fraction(a, b).add(new Fraction(c, d));
+        Fraction frac = new Fraction(a, b).add(new Fraction(c, d));
+    }
+
+    @Test
+    public void testMethodSubtract() {
+        Fraction expectedOutcome = new Fraction(1, 4);
+
+        assertEquals(expectedOutcome,
+                new Fraction(1, 2).subtract(new Fraction(1, 4)));
+    }
+
+    @SuppressWarnings("unused")
+    @Test(expected = ArithmeticException.class)
+    public void testMethodSubtractNumeratorOverflow() {
+        int a = Integer.MAX_VALUE + 1; // 10
+        int b = Integer.MAX_VALUE;
+        int c = Integer.MAX_VALUE + 2;
+        int d = Integer.MAX_VALUE;
+
+        Fraction frac = new Fraction(a, b).subtract(new Fraction(c, d));
+    }
+
+    @SuppressWarnings("unused")
+    @Test(expected = ArithmeticException.class)
+    public void testMethodSubtractNumeratorUnderflow() {
+        int a = Integer.MIN_VALUE + 1;
+        int b = Integer.MIN_VALUE;
+        int c = Integer.MIN_VALUE;
+        int d = Integer.MIN_VALUE;
+
+        Fraction frac = new Fraction(a, b).subtract(new Fraction(c, d));
+    }
+
+    @SuppressWarnings("unused")
+    @Test(expected = ArithmeticException.class)
+    public void testMethodSubtractDenominatorOverflow() {
+        int a = Integer.MAX_VALUE; // 10
+        int b = Integer.MAX_VALUE + 2;
+        int c = Integer.MAX_VALUE;
+        int d = Integer.MAX_VALUE + 1;
+
+        Fraction frac = new Fraction(a, b).subtract(new Fraction(c, d));
+    }
+
+    @SuppressWarnings("unused")
+    @Test(expected = ArithmeticException.class)
+    public void testMethodSubtractDenominatorUnderflow() {
+        int a = Integer.MIN_VALUE;
+        int b = Integer.MIN_VALUE + 1;
+        int c = Integer.MIN_VALUE;
+        int d = Integer.MIN_VALUE;
+
+        Fraction frac = new Fraction(a, b).subtract(new Fraction(c, d));
     }
 }

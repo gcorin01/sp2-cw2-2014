@@ -143,7 +143,7 @@ public class Fraction {
         if (a == 0 || b == 0) return 0;
         int lcm = (a * b) / getGcd(a, b);
 
-        return Math.abs(lcm);
+        return lcm;
     }
 
     public Fraction add(Fraction frac) {
@@ -158,6 +158,34 @@ public class Fraction {
         } catch (ArithmeticException e) {
             System.out
                     .println("The Addition result is either too small or too big to be calculated correctly");
+            throw e;
+        }
+
+        return frac;
+    }
+
+    public Fraction subtract(Fraction frac) {
+
+        try {
+            int lcm = getLcm(this.denominator, frac.denominator);
+
+            frac.numerator = Math.multiplyExact((lcm / frac.denominator),
+                    frac.numerator);
+            this.numerator = Math.multiplyExact((lcm / this.denominator),
+                    this.numerator);
+
+            if (frac.numerator >= this.numerator) {
+                frac.numerator = Math.subtractExact(frac.numerator,
+                        this.numerator);
+            } else {
+                frac.numerator = Math.subtractExact(this.numerator,
+                        frac.numerator);
+            }
+            
+            frac.denominator = lcm;
+        } catch (ArithmeticException e) {
+            System.out
+                    .println("The Subtraction result is either too small or too big to be calculated correctly");
             throw e;
         }
 
