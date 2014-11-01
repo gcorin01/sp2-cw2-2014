@@ -17,10 +17,11 @@ public class Fraction {
             int divisionResult = num / denum;
         } catch (ArithmeticException e) {
             System.out.println("Invalid fraction with denominator 0");
+            throw e;
         }
-        
+
         int gcd = getGcd(num, denum);
-        
+
         setNumerator(num / gcd);
         setDenominator(denum / gcd);
     }
@@ -30,14 +31,14 @@ public class Fraction {
      *            the numerator to set
      */
     public void setNumerator(int numerator) {
-        this.numerator = numerator;
+        this.numerator = Math.toIntExact(numerator);
     }
 
     /**
      * @return the numerator
      */
     public int getNumerator() {
-        
+
         return numerator;
     }
 
@@ -57,10 +58,21 @@ public class Fraction {
         return denominator;
     }
 
-    public int divide(Fraction fraction) {
-        int divisionResult = this.numerator / this.denominator;
+    public Fraction divide(Fraction frac) {
 
-        return divisionResult;
+        try {
+            int tempNum = Math.multiplyExact(this.numerator, frac.denominator);
+            int tempDenom = Math
+                    .multiplyExact(this.denominator, frac.numerator);
+
+            frac = new Fraction(tempNum, tempDenom);
+        } catch (ArithmeticException e) {
+            System.out
+                    .println("The Division result is either too big or too small to be calculated accuraterly");
+            throw e;
+        }
+
+        return frac;
     }
 
     /*
@@ -91,31 +103,35 @@ public class Fraction {
     }
 
     public Fraction multiply(Fraction frac) {
-        int num = 0;
-        int denom = 0;
-        
+
         try {
-            num = this.numerator * frac.numerator;
-            denom = this.denominator * frac.denominator;
+            int num = Math.multiplyExact(this.numerator, frac.numerator);
+            int denom = Math.multiplyExact(this.denominator, frac.denominator);
+
+            frac = new Fraction(num, denom);
         } catch (ArithmeticException e) {
-            System.out.println("The Multiplication result is  ether too big or too small to be displayed accuraterly.");
+            System.out
+                    .println("The Multiplication result is either too big or too small to be calculated accuraterly");
+            throw e;
         }
 
-        return new Fraction(num, denom);
+        return frac;
     }
 
-    public int getGcd(int num1, int num2) {        
-        
+    public int getGcd(int num1, int num2) {
+
         while (num2 != 0) {
             int tempGcd = num2;
             num2 = num1 % num2;
             num1 = tempGcd;
         }
-        
+
         return num1;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
@@ -126,8 +142,25 @@ public class Fraction {
     public int getLcm(int a, int b) {
         if (a == 0 || b == 0) return 0;
         int lcm = (a * b) / getGcd(a, b);
-          
+
         return Math.abs(lcm);
     }
-    
+
+    public Fraction add(Fraction frac) {
+
+        try {
+            int lcm = getLcm(this.denominator, frac.denominator);
+            int tempNum = Math.addExact(Math.multiplyExact(
+                    (lcm / frac.denominator), frac.numerator), Math
+                    .multiplyExact((lcm / this.denominator), this.numerator));
+
+            frac = new Fraction(tempNum, lcm);
+        } catch (ArithmeticException e) {
+            System.out
+                    .println("The Addition result is either too small or too big to be calculated correctly");
+            throw e;
+        }
+
+        return frac;
+    }
 }

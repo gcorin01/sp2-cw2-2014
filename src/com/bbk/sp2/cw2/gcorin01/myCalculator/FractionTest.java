@@ -9,7 +9,6 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -93,11 +92,34 @@ public class FractionTest {
 
     @Test
     public void testMethodDivide() {
-        int expectedResult = 0;
-        int divisionResult = fraction.divide(fraction);
+        Fraction expectedResult = new Fraction(9, 10);
+        Fraction fraction = new Fraction(3, 5);
+        Fraction divisionResult = fraction.divide(new Fraction(2, 3));
 
         assertEquals("testMethodDivide() - Unexpected division result",
                 expectedResult, divisionResult);
+    }
+
+    @SuppressWarnings("unused")
+    @Test(expected = ArithmeticException.class)
+    public void testMethodDivideOverflow() {
+        int a = Integer.MAX_VALUE + 1;
+        int b = Integer.MAX_VALUE * 3;
+        int c = Integer.MAX_VALUE + 1;
+        int d = Integer.MAX_VALUE * 3;
+
+        Fraction frac = new Fraction(a, b).divide(new Fraction(c, d));
+    }
+
+    @SuppressWarnings("unused")
+    @Test(expected = ArithmeticException.class)
+    public void testMethodDivideUnderflow() {
+        int a = Integer.MIN_VALUE - 1;
+        int b = Integer.MIN_VALUE / 3;
+        int c = Integer.MIN_VALUE - 1;
+        int d = Integer.MIN_VALUE / 3;
+
+        Fraction frac = new Fraction(a, b).divide(new Fraction(c, d));
     }
 
     // add more divide tests to assert result
@@ -127,7 +149,7 @@ public class FractionTest {
     }
 
     @Test
-    public void testMethodMultiply() {
+    public void testMethodMultiply1() {
 
         Fraction expectedOutcome = new Fraction(3, 10);
 
@@ -143,10 +165,32 @@ public class FractionTest {
     }
 
     @Test
-    public void testMethodMultiply1() {
+    public void testMethodMultiply() {
 
         assert ((new Fraction(3, 10)).equals(new Fraction(1, 2)
                 .multiply(new Fraction(3, 5)))) : "testMethodMultiply1() - Fraction not equal after multiplication ";
+    }
+
+    @SuppressWarnings("unused")
+    @Test(expected = ArithmeticException.class)
+    public void testMethodMultiplyOverflow() {
+        int a = Integer.MAX_VALUE + 1;
+        int b = Integer.MAX_VALUE * 3;
+        int c = Integer.MAX_VALUE * 3;
+        int d = Integer.MAX_VALUE + 1;
+
+        Fraction frac = new Fraction(a, b).multiply(new Fraction(c, d));
+    }
+
+    @SuppressWarnings("unused")
+    @Test(expected = ArithmeticException.class)
+    public void testMethodMultiplyUnderflow() {
+        int a = Integer.MIN_VALUE + 1;
+        int b = Integer.MIN_VALUE * 3;
+        int c = Integer.MIN_VALUE * 3;
+        int d = Integer.MIN_VALUE + 1;
+
+        Fraction frac = new Fraction(a, b).multiply(new Fraction(c, d));
     }
 
     @Test
@@ -165,7 +209,8 @@ public class FractionTest {
         String actualOutcome = fraction.toString();
 
         assertEquals(
-                "testMethodToString() - Unexpected Fraction to string outcome",
+
+        "testMethodToString() - Unexpected Fraction to string outcome",
                 expectedOutcome, actualOutcome);
     }
 
@@ -175,69 +220,118 @@ public class FractionTest {
         int a = 3;
         int b = 15;
         int lcm = fraction.getLcm(a, b);
-        
-        assertEquals("testMethodLeastCommonMultiplier() - Unexpected lcm outcome", expectedOutcome, lcm);
+
+        assertEquals(
+                "testMethodLeastCommonMultiplier() - Unexpected lcm outcome",
+                expectedOutcome, lcm);
     }
-    
-    
+
     @Test
     public void testMethodLeastCommonMultiplierWithNegNumb() {
         int expectedOutcome = 15;
         int a = -3;
         int b = -15;
         int lcm = fraction.getLcm(a, b);
-        
-        assertEquals("testMethodLeastCommonMultiplier() - Unexpected lcm outcome", expectedOutcome, lcm);
+
+        assertEquals(
+                "testMethodLeastCommonMultiplier() - Unexpected lcm outcome",
+                expectedOutcome, lcm);
     }
-    
+
     @Test
     public void testMethodLeastCommonMultiplierWithOneNegNumb() {
         int expectedOutcome = 15;
         int a = -3;
         int b = 15;
         int lcm = fraction.getLcm(a, b);
-        
-        assertEquals("testMethodLeastCommonMultiplier() - Unexpected lcm outcome", expectedOutcome, lcm);
+
+        assertEquals(
+                "testMethodLeastCommonMultiplier() - Unexpected lcm outcome",
+                expectedOutcome, lcm);
     }
-    
-    
+
     @Test
     public void testMethodLeastCommonMultiplierWithZero() {
         int expectedOutcome = 0;
         int a = 0;
         int b = -15;
         int lcm = fraction.getLcm(a, b);
-        
-        assertEquals("testMethodLeastCommonMultiplier() - Unexpected lcm outcome", expectedOutcome, lcm);
+
+        assertEquals(
+                "testMethodLeastCommonMultiplier() - Unexpected lcm outcome",
+                expectedOutcome, lcm);
     }
-    
+
     @Test
     public void testMethodLeastCommonMultiplierWithEqualNumbs() {
         int expectedOutcome = 10000;
-        int a = 1000;
+        int a = 10000;
         int b = 10000;
         int lcm = fraction.getLcm(a, b);
-        
-        assertEquals("testMethodLeastCommonMultiplier() - Unexpected lcm outcome", expectedOutcome, lcm);
+
+        assertEquals(
+                "testMethodLeastCommonMultiplier() - Unexpected lcm outcome",
+                expectedOutcome, lcm);
     }
-    
+
+    @SuppressWarnings("unused")
     @Test
     public void testMethodLeastCommonMultiplierWithBigNumbs() {
         int expectedOutcome = 10000;
         int a = 214748364;
         int b = 214748364;
         int lcm = fraction.getLcm(a, b);
-        
-        assertEquals("testMethodLeastCommonMultiplier() - Unexpected lcm outcome", expectedOutcome, lcm);
+    }
+
+    @Test
+    public void testMethodAdd() {
+        Fraction expectedOutcome = new Fraction(8, 15);
+
+        assertEquals(expectedOutcome,
+                new Fraction(1, 3).add(new Fraction(1, 5)));
+    }
+
+    @SuppressWarnings("unused")
+    @Test(expected = ArithmeticException.class)
+    public void testMethodAddNumeratorOverflow() {
+        int a = Integer.MAX_VALUE + 1;
+        int b = Integer.MAX_VALUE;
+        int c = Integer.MAX_VALUE;
+        int d = Integer.MAX_VALUE;
+
+       Fraction frac = new Fraction(a, b).add(new Fraction(c, d));
     }
     
+    @SuppressWarnings("unused")
+    @Test(expected = ArithmeticException.class)
+    public void testMethodAddDenominatorOverflow() {
+        int a = Integer.MAX_VALUE;
+        int b = Integer.MAX_VALUE + 1;
+        int c = Integer.MAX_VALUE;
+        int d = Integer.MAX_VALUE;
+
+       Fraction frac = new Fraction(a, b).add(new Fraction(c, d));
+    }
+
+    @SuppressWarnings("unused")
+    @Test(expected = ArithmeticException.class)
+    public void testMethodAddNumeratorUnderflow() {
+        int a = Integer.MIN_VALUE - 1;
+        int b = Integer.MIN_VALUE;
+        int c = Integer.MIN_VALUE;
+        int d = Integer.MIN_VALUE;
+
+       Fraction frac = new Fraction(a, b).add(new Fraction(c, d));
+    }
     
-//    @Test
-//    public void testMethodAdd() {
-//        Fraction expectedOutcome = new Fraction(); 
-//        Fraction frac1 = new Fraction(3, 4);
-//        Fraction frac2 = new Fraction(2, 3);
-//        
-//        
-//    }
+    @SuppressWarnings("unused")
+    @Test(expected = ArithmeticException.class)
+    public void testMethodAdddenominatorUnderflow() {
+        int a = Integer.MIN_VALUE;
+        int b = Integer.MIN_VALUE - 1;
+        int c = Integer.MIN_VALUE;
+        int d = Integer.MIN_VALUE;
+
+       Fraction frac = new Fraction(a, b).add(new Fraction(c, d));
+    }
 }
