@@ -336,11 +336,19 @@ public class FractionTest {
     }
 
     @Test
-    public void testMethodSubtract() {
+    public void testMethodSubtractThisFractionGreater() {
         Fraction expectedOutcome = new Fraction(1, 4);
 
         assertEquals(expectedOutcome,
                 new Fraction(1, 2).subtract(new Fraction(1, 4)));
+    }
+
+    @Test
+    public void testMethodSubtractThisFractionSmaller() {
+        Fraction expectedOutcome = new Fraction(1, -4);
+
+        assertEquals(expectedOutcome,
+                new Fraction(1, 4).subtract(new Fraction(1, 2)));
     }
 
     @SuppressWarnings("unused")
@@ -385,5 +393,37 @@ public class FractionTest {
         int d = Integer.MIN_VALUE;
 
         Fraction frac = new Fraction(a, b).subtract(new Fraction(c, d));
+    }
+
+    @Test
+    public void testMethodAbsValueNumDenumNegative() {
+        Fraction inputFrac = new Fraction(-7, -3);
+        Fraction expectedOutcome = new Fraction(7, 3);
+
+        assertEquals(expectedOutcome, fraction.absValue(inputFrac));
+    }
+    
+    @Test
+    public void testMethodAbsValueNumDenumPositive() {
+        Fraction inputFrac = new Fraction(7, 3);
+        Fraction expectedOutcome = new Fraction(7, 3);
+
+        assertEquals(expectedOutcome, fraction.absValue(inputFrac));
+    }
+    
+    @Test
+    public void testMethodAbsValueNumNegative() {
+        Fraction inputFrac = new Fraction(-7, 3);
+        Fraction expectedOutcome = new Fraction(7, 3);
+
+        assertEquals(expectedOutcome, fraction.absValue(inputFrac));
+    }
+    
+    @Test
+    public void testMethodAbsValueDenumNegative() {
+        Fraction inputFrac = new Fraction(7, -3);
+        Fraction expectedOutcome = new Fraction(7, 3);
+
+        assertEquals(expectedOutcome, fraction.absValue(inputFrac));
     }
 }

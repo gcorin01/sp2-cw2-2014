@@ -65,14 +65,12 @@ public class Fraction {
             int tempDenom = Math
                     .multiplyExact(this.denominator, frac.numerator);
 
-            frac = new Fraction(tempNum, tempDenom);
+            return new Fraction(tempNum, tempDenom);
         } catch (ArithmeticException e) {
             System.out
                     .println("The Division result is either too big or too small to be calculated accuraterly");
             throw e;
         }
-
-        return frac;
     }
 
     /*
@@ -108,14 +106,12 @@ public class Fraction {
             int num = Math.multiplyExact(this.numerator, frac.numerator);
             int denom = Math.multiplyExact(this.denominator, frac.denominator);
 
-            frac = new Fraction(num, denom);
+            return new Fraction(num, denom);
         } catch (ArithmeticException e) {
             System.out
                     .println("The Multiplication result is either too big or too small to be calculated accuraterly");
             throw e;
         }
-
-        return frac;
     }
 
     public int getGcd(int num1, int num2) {
@@ -154,41 +150,44 @@ public class Fraction {
                     (lcm / frac.denominator), frac.numerator), Math
                     .multiplyExact((lcm / this.denominator), this.numerator));
 
-            frac = new Fraction(tempNum, lcm);
+            return new Fraction(tempNum, lcm);
         } catch (ArithmeticException e) {
             System.out
                     .println("The Addition result is either too small or too big to be calculated correctly");
             throw e;
         }
-
-        return frac;
     }
 
     public Fraction subtract(Fraction frac) {
 
         try {
             int lcm = getLcm(this.denominator, frac.denominator);
-
-            frac.numerator = Math.multiplyExact((lcm / frac.denominator),
-                    frac.numerator);
-            this.numerator = Math.multiplyExact((lcm / this.denominator),
+            int tempThisNum = Math.multiplyExact((lcm / this.denominator),
                     this.numerator);
+            int tempFracNum = Math.multiplyExact((lcm / frac.denominator),
+                    frac.numerator);
+            int num = Math.subtractExact(tempThisNum, tempFracNum);
 
-            if (frac.numerator >= this.numerator) {
-                frac.numerator = Math.subtractExact(frac.numerator,
-                        this.numerator);
-            } else {
-                frac.numerator = Math.subtractExact(this.numerator,
-                        frac.numerator);
-            }
-            
-            frac.denominator = lcm;
+            return new Fraction(num, lcm);
         } catch (ArithmeticException e) {
             System.out
                     .println("The Subtraction result is either too small or too big to be calculated correctly");
             throw e;
         }
+    }
 
-        return frac;
+    public Fraction absValue(Fraction frac) {
+        int num = frac.numerator;
+        int denum = frac.denominator;
+
+        if (num < 0) {
+            num = num * -1;
+        }
+
+        if (denum < 0) {
+            denum = denum * -1;
+        }
+
+        return new Fraction(num, denum);
     }
 }
