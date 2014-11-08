@@ -190,4 +190,9 @@ public class Fraction {
 
         return new Fraction(num, denum);
     }
+
+    public Fraction negate(Fraction frac) {
+        // TODO Auto-generated method stub
+        return new Fraction(num, denum);
+    }
 }
