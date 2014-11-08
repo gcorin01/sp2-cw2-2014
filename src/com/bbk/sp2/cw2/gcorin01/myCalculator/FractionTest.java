@@ -56,7 +56,6 @@ public class FractionTest {
 
         assertEquals("testMethodSetNumerator() - Unexpected numerator value",
                 expectedNumerator, fraction.getNumerator());
-
     }
 
     @Test
@@ -208,6 +207,19 @@ public class FractionTest {
                 + fraction.getDenominator();
         String actualOutcome = fraction.toString();
 
+        assertEquals(
+
+        "testMethodToString() - Unexpected Fraction to string outcome",
+                expectedOutcome, actualOutcome);
+    }
+
+    @Test
+    public void testMethodToStringDenIsOne() {
+        String expectedOutcome = fraction.getNumerator() + "";
+        String actualOutcome = fraction.toString();
+
+        
+        
         assertEquals(
 
         "testMethodToString() - Unexpected Fraction to string outcome",
@@ -425,5 +437,14 @@ public class FractionTest {
         Fraction expectedOutcome = new Fraction(7, 3);
 
         assertEquals(expectedOutcome, fraction.absValue(inputFrac));
+    }
+    
+    
+    @Test
+    public void testMethodNegate() {
+        Fraction inputFrac = new Fraction(7, -3);
+        Fraction expectedOutcome = new Fraction(7, 3);
+     // TODO find out what's required + create tests
+        assertEquals(expectedOutcome, fraction.negate(inputFrac));
     }
 }
