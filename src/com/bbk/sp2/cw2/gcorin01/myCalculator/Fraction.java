@@ -192,7 +192,8 @@ public class Fraction {
     }
 
     public Fraction negate(Fraction frac) {
-        // TODO Auto-generated method stub
-        return new Fraction(num, denum);
+        int num = frac.numerator * -1;
+        int denom = frac.denominator * -1;
+        return new Fraction(num, denom);
     }
 }
