@@ -218,7 +218,7 @@ public class FractionTest {
         String expectedOutcome = fraction.getNumerator() + "";
         String actualOutcome = fraction.toString();
 
-        
+        // TODO test the creation of a string when the denominator is 1
         
         assertEquals(
 
