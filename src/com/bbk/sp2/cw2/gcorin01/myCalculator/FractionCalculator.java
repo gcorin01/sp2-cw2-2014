@@ -9,6 +9,10 @@ package com.bbk.sp2.cw2.gcorin01.myCalculator;
  */
 public class FractionCalculator {
 
+    public FractionCalculator(int currentValue, String userInput) {
+        // TODO Auto-generated constructor stub
+    }
+
     /**
      * @param args
      */
