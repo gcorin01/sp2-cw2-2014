@@ -218,8 +218,11 @@ public class FractionTest {
         String expectedOutcome = fraction.getNumerator() + "";
         String actualOutcome = fraction.toString();
 
+<<<<<<< HEAD
         // TODO test the creation of a string when the denominator is 1
         
+=======
+>>>>>>> new/methodNegate
         assertEquals(
 
         "testMethodToString() - Unexpected Fraction to string outcome",
@@ -414,7 +417,7 @@ public class FractionTest {
 
         assertEquals(expectedOutcome, fraction.absValue(inputFrac));
     }
-    
+
     @Test
     public void testMethodAbsValueNumDenumPositive() {
         Fraction inputFrac = new Fraction(7, 3);
@@ -422,7 +425,7 @@ public class FractionTest {
 
         assertEquals(expectedOutcome, fraction.absValue(inputFrac));
     }
-    
+
     @Test
     public void testMethodAbsValueNumNegative() {
         Fraction inputFrac = new Fraction(-7, 3);
@@ -430,7 +433,7 @@ public class FractionTest {
 
         assertEquals(expectedOutcome, fraction.absValue(inputFrac));
     }
-    
+
     @Test
     public void testMethodAbsValueDenumNegative() {
         Fraction inputFrac = new Fraction(7, -3);
@@ -438,13 +441,38 @@ public class FractionTest {
 
         assertEquals(expectedOutcome, fraction.absValue(inputFrac));
     }
-    
-    
+
     @Test
-    public void testMethodNegate() {
-        Fraction inputFrac = new Fraction(7, -3);
-        Fraction expectedOutcome = new Fraction(7, 3);
-     // TODO find out what's required + create tests
+    public void testMethodNegateWithPositiveInput() {
+        Fraction inputFrac = new Fraction(7, 3);
+        Fraction expectedOutcome = new Fraction(-7, 3);
+
         assertEquals(expectedOutcome, fraction.negate(inputFrac));
     }
+
+    
+    @Test
+    public void testMethodNegateWithPosotiveInputNegativeNumAndDenom() {
+        Fraction inputFrac = new Fraction(-7, -3);
+        Fraction expectedOutcome = new Fraction(-7, 3);
+
+        assertEquals(expectedOutcome, fraction.negate(inputFrac));
+    }
+
+    @Test
+    public void testMethodNegateWithNegativeInput() {
+        Fraction inputFrac = new Fraction(7, -3);
+        Fraction expectedOutcome = new Fraction(7, 3);
+
+        assertEquals(expectedOutcome, fraction.negate(inputFrac));
+    }
+
+    @Test
+    public void testMethodNegateWithNegativeInput2() {
+        Fraction inputFrac = new Fraction(-7, 3);
+        Fraction expectedOutcome = new Fraction(7, 3);
+
+        assertEquals(expectedOutcome, fraction.negate(inputFrac));
+    }
+
 }

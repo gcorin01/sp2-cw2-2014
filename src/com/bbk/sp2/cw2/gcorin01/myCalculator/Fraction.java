@@ -192,8 +192,20 @@ public class Fraction {
     }
 
     public Fraction negate(Fraction frac) {
-        int num = frac.numerator * -1;
-        int denom = frac.denominator * -1;
+        int num = frac.numerator;
+        int denom = frac.denominator;
+
+        if (num >= 0 && denom >= 1) { // e.g. 1/1
+            num = frac.numerator * -1;
+            denom = frac.denominator;
+        } else if (num >= 0 && denom < 0) { // e.g. 1/-1
+            num = frac.numerator;
+            denom = frac.denominator * -1;
+        } else if (num < 0 && denom >= 1) { // e.g. -1/1
+            num = frac.numerator * -1;
+            denom = frac.denominator;
+        }
+
         return new Fraction(num, denom);
     }
 }
