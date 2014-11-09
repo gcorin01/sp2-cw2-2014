@@ -215,7 +215,9 @@ public class FractionTest {
 
     @Test
     public void testMethodToStringDenIsOne() {
-        String expectedOutcome = fraction.getNumerator() + "";
+        Fraction frac = new Fraction(879, 1);
+        String expectedOutcome = "879";
+        fraction = frac;
         String actualOutcome = fraction.toString();
 
 <<<<<<< HEAD
@@ -450,7 +452,6 @@ public class FractionTest {
         assertEquals(expectedOutcome, fraction.negate(inputFrac));
     }
 
-    
     @Test
     public void testMethodNegateWithPosotiveInputNegativeNumAndDenom() {
         Fraction inputFrac = new Fraction(-7, -3);
