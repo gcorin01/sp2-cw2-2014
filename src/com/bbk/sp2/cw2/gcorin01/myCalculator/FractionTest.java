@@ -219,12 +219,7 @@ public class FractionTest {
         String expectedOutcome = "879";
         fraction = frac;
         String actualOutcome = fraction.toString();
-
-<<<<<<< HEAD
-        // TODO test the creation of a string when the denominator is 1
         
-=======
->>>>>>> new/methodNegate
         assertEquals(
 
         "testMethodToString() - Unexpected Fraction to string outcome",
