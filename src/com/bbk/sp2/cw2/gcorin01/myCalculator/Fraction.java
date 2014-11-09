@@ -132,7 +132,15 @@ public class Fraction {
      */
     @Override
     public String toString() {
-        return getNumerator() + "/" + getDenominator();
+        String s;
+
+        if (getDenominator() == 1) {
+            s = getNumerator() + "";
+        } else {
+            s = getNumerator() + "/" + getDenominator();
+        }
+
+        return s;
     }
 
     public int getLcm(int a, int b) {
