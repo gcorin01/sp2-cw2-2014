@@ -3,6 +3,8 @@
  */
 package com.bbk.sp2.cw2.gcorin01.myCalculator;
 
+import java.util.StringTokenizer;
+
 /**
  * @author Gabriel
  *
@@ -21,4 +23,22 @@ public class FractionCalculator {
 
     }
 
+    public String[] inputTokenizer(String userInput) {
+        String delimiter = " ";
+        StringTokenizer userInputTokenized = new StringTokenizer(userInput,
+                delimiter);
+
+        int length = userInputTokenized.countTokens();
+        int i = 0;
+
+        String[] input = new String[length];
+
+        while (userInputTokenized.hasMoreTokens()) {
+            String token = userInputTokenized.nextToken();
+            input[i] = token;
+            i++;
+        }
+
+        return input;
+    }
 }
