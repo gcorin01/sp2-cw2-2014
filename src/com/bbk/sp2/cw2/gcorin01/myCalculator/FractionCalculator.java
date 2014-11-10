@@ -153,7 +153,9 @@ public class FractionCalculator {
             }
 
             if (basicOperationCount == 1 && fractionCount == 2) {
-
+                basicOperationCount -= 1;
+                fractionCount -= 1;
+                
                 switch (currentOperation) {
 
                 case "+":
@@ -173,22 +175,19 @@ public class FractionCalculator {
                     break;
 
                 }
-                basicOperationCount = 0;
-                fractionCount = 0;
             }
             
-            if (fractionCount == 1) {
+            if ((i%2 != 0) && fractionCount == 1) {
                 currentValue = tempFrac;
                 
-            } else if (fractionCount == 2) {
+            } else if (fractionCount > 1) {
                 this.currentValue = "Two consecutive fraction are not accepted; separate each fraction with an operator";
                 
                 return this.currentValue;
             }
-
             this.currentValue = currentValue.toString();
         }
-
+        
         return this.currentValue;
     }
 

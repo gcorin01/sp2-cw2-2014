@@ -5,8 +5,6 @@ package com.bbk.sp2.cw2.gcorin01.myCalculator;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-
 import org.junit.Test;
 
 /**
@@ -206,7 +204,71 @@ public class FractionCalculatorTest {
         String actualResult = calculator.evaluate(frac, userInput);
         
         assertEquals(
-                "testMethodEvaluateAddition()", expectedResult, actualResult);
+                "testMethodEvaluateCheckTwoConsecutiveFractions()", expectedResult, actualResult);
+    }
+        
+    @Test
+    public void testMethodEvaluateCheckTwoConsecutiveFractionsAfterValidOperation() {
+        String currentValue = "0";
+        String userInput = "3/4 + 1/4 1/4";
+        String expectedResult = "Two consecutive fraction are not accepted; separate each fraction with an operator";
+        Fraction frac = new Fraction(0, 1);
+
+        FractionCalculator calculator = new FractionCalculator(currentValue,
+                userInput);
+        
+        String actualResult = calculator.evaluate(frac, userInput);
+        
+        assertEquals(
+                "testMethodEvaluateCheckTwoConsecutiveFractionsAfterValidOperation()", expectedResult, actualResult);
+    }
+    
+    @Test
+    public void testMethodEvaluateCheckTwoConsecutiveFractionsBeforeValidOperation() {
+        String currentValue = "0";
+        String userInput = "3/4 1/4 + 1/4";
+        String expectedResult = "Two consecutive fraction are not accepted; separate each fraction with an operator";
+        Fraction frac = new Fraction(0, 1);
+
+        FractionCalculator calculator = new FractionCalculator(currentValue,
+                userInput);
+        
+        String actualResult = calculator.evaluate(frac, userInput);
+        
+        assertEquals(
+                "testMethodEvaluateCheckTwoConsecutiveFractionsBeforeValidOperation()", expectedResult, actualResult);
+    }
+    
+    @Test
+    public void testMethodEvaluateCheckThreeConsecutiveFractions() {
+        String currentValue = "0";
+        String userInput = "3/4 1/4  1/4";
+        String expectedResult = "Two consecutive fraction are not accepted; separate each fraction with an operator";
+        Fraction frac = new Fraction(0, 1);
+
+        FractionCalculator calculator = new FractionCalculator(currentValue,
+                userInput);
+        
+        String actualResult = calculator.evaluate(frac, userInput);
+        
+        assertEquals(
+                "testMethodEvaluateCheckThreeConsecutiveFractions()", expectedResult, actualResult);
+    }
+    
+    @Test
+    public void testMethodEvaluateCheckFourConsecutiveFractions() {
+        String currentValue = "0";
+        String userInput = "3/4 1/4  1/4 3/4";
+        String expectedResult = "Two consecutive fraction are not accepted; separate each fraction with an operator";
+        Fraction frac = new Fraction(0, 1);
+
+        FractionCalculator calculator = new FractionCalculator(currentValue,
+                userInput);
+        
+        String actualResult = calculator.evaluate(frac, userInput);
+        
+        assertEquals(
+                "testMethodEvaluateCheckFourConsecutiveFractions()", expectedResult, actualResult);
     }
 
     // TODO Input exceptions to be added: two consecutive operators, two
