@@ -71,21 +71,30 @@ public class FractionCalculator {
 
     public String evaluate (Fraction frac, String userInput) {
         // 3/4 + 1/4
-        int operationCount = 0;
+        int basicOperationCount = 0;
+        int advancedOperationCount = 0;
         int fractionCount = 0;
         String currentOperation = "";
-        ArrayList<String> operators = new ArrayList<String>(Arrays.asList("+",
-                "-", "*", "/", "a", "A", "abs", "n", "N", "neg", "c", "C",
-                "clear", "q", "Q", "quit"));
+
+        ArrayList<String> basicOperators = new ArrayList<String>(Arrays.asList(
+                "+", "-", "*", "/"));
+        ArrayList<String> advancedOperators = new ArrayList<String>(
+                Arrays.asList("a", "A", "abs", "n", "N", "neg", "c", "C",
+                        "clear", "q", "Q", "quit"));
+        ArrayList<String> clearOperators = new ArrayList<String>(Arrays.asList(
+                "c", "C", "clear"));
+        ArrayList<String> quitOperators = new ArrayList<String>(Arrays.asList(
+                "q", "Q", "quit"));
 
         String tokenDelimeter = " ";
         String[] tokens = inputTokenizer(userInput, tokenDelimeter);
-        Fraction fracInput = frac;
+        Fraction currentValue = frac;
+        Fraction tempFrac = frac;
 
         for (int i = 0; i < tokens.length; i++) {
             String[] token;
 
-            if (tokens[i].contains("/") && fractionCount == 0) {
+            if (tokens[i].contains("/")) {
                 tokenDelimeter = "/";
                 token = inputTokenizer(tokens[i], tokenDelimeter);
 
@@ -97,51 +106,93 @@ public class FractionCalculator {
                             .println("Invalid input; a fraction needs to have a numerator and a denominator separated by a \"/\" with no spaces in the middle.");
                     throw e;
                 }
-
-                fracInput = new Fraction(Integer.parseInt(token[0]),
+                
+                fractionCount += 1;
+                tempFrac = new Fraction(Integer.parseInt(token[0]),
                         Integer.parseInt(token[1]));
-                currentValue = fracInput.toString();
-                fractionCount = 1;
+                
+                this.currentValue = tempFrac.toString();
 
-            } else if (tokens[i].matches("-?\\d+") && fractionCount == 0) {
-                fracInput = new Fraction(Integer.parseInt(tokens[i]), 1);
-                currentValue = fracInput.toString();
-                fractionCount = 1;
+            } else if (tokens[i].matches("-?\\d+")) {
+                fractionCount += 1;
+                tempFrac = new Fraction(Integer.parseInt(tokens[i]), 1);
+                
+                this.currentValue = tempFrac.toString();
 
-            } else if (operators.contains(tokens[i]) && operationCount == 0) {
+            } else if (basicOperators.contains(tokens[i])
+                    && basicOperationCount == 0 && advancedOperationCount == 0) {
                 currentOperation = tokens[i];
+                basicOperationCount = 1;
+
+            } else if (advancedOperators.contains(tokens[i])
+                    && basicOperationCount == 0 && advancedOperationCount == 0) {
+                currentOperation = tokens[i];
+                advancedOperationCount = 1;
+
+            } else if (clearOperators.contains(tokens[i])) {
+                currentOperation = "";
+                basicOperationCount = 0;
+                advancedOperationCount = 0;
+                currentValue = new Fraction(0, 1);
+                this.currentValue = "0";
+
+                return this.currentValue;
+
+            } else if (quitOperators.contains(tokens[i])) {
+                currentOperation = "";
+                basicOperationCount = 0;
+                advancedOperationCount = 0;
+                currentValue = new Fraction(0, 1);
+                this.currentValue = "Thank you and good bye";
+
+                return this.currentValue;
+
+            } else {
+                this.currentValue = "Invalid input";
+
+                return this.currentValue;
+            }
+
+            if (basicOperationCount == 1 && fractionCount == 2) {
 
                 switch (currentOperation) {
 
                 case "+":
-                    fracInput = fracInput.add(fracInput);
+                    currentValue = currentValue.add(tempFrac);
                     break;
 
                 case "-":
-                    fracInput = fracInput.subtract(fracInput);
+                    currentValue = currentValue.add(tempFrac);
                     break;
 
                 case "/":
-                    fracInput = fracInput.divide(fracInput);
+                    currentValue = currentValue.add(tempFrac);
                     break;
 
                 case ("*"):
-                    fracInput = fracInput.multiply(fracInput);
+                    currentValue = currentValue.add(tempFrac);
                     break;
 
                 default:
                     System.out.println("Not a valid operator");
 
                 }
-
-                // TODO Review code so that only one operation at the time is
-                // allowed and after the first fraction the operation needs to
-                // be done recursion may be necessary
-                fractionCount = 1;
-                operationCount = 1;
+                basicOperationCount = 0;
+                fractionCount = 0;
             }
+            
+            if (fractionCount == 1) {
+                currentValue = tempFrac;
+            }
+
+            this.currentValue = currentValue.toString();
+            // TODO Review code so that only one operation at the time is
+            // allowed and after the first fraction the operation needs to
+            // be done recursion may be necessary
+
         }
-        return currentValue;
+
+        return this.currentValue;
     }
 
     /**

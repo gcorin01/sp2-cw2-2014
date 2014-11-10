@@ -169,7 +169,7 @@ public class FractionCalculatorTest {
     public void testMethodEvaluate() {
         String currentValue = "0";
         String userInput = "3/4";
-        Fraction frac = new Fraction(0, 0);
+        Fraction frac = new Fraction(0, 1);
 
         FractionCalculator calculator = new FractionCalculator(currentValue,
                 userInput);
@@ -181,7 +181,7 @@ public class FractionCalculatorTest {
     public void testMethodEvaluateAddition() {
         String currentValue = "0";
         String userInput = "3/4 + 1/4";
-        String expectedResult = "1/1";
+        String expectedResult = "1";
         Fraction frac = new Fraction(0, 1);
 
         FractionCalculator calculator = new FractionCalculator(currentValue,
@@ -192,6 +192,8 @@ public class FractionCalculatorTest {
         assertEquals(
                 "testMethodEvaluateAddition()", expectedResult, actualResult);
     }
+    
+    
 
     // TODO Input exceptions to be added: two consecutive operators, two
     // consecutive fractions/integers, unrecognised operator, entered only

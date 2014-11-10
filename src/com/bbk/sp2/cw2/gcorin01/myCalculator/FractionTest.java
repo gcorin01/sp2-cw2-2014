@@ -297,10 +297,10 @@ public class FractionTest {
 
     @Test
     public void testMethodAdd() {
-        Fraction expectedOutcome = new Fraction(8, 15);
+        Fraction expectedOutcome = new Fraction(1, 1);
 
         assertEquals(expectedOutcome,
-                new Fraction(1, 3).add(new Fraction(1, 5)));
+                new Fraction(3, 4).add(new Fraction(1, 4)));
     }
 
     @SuppressWarnings("unused")
