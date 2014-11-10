@@ -105,18 +105,26 @@ public class FractionCalculator {
                             .println("Invalid input; a fraction needs to have a numerator and a denominator separated by a \"/\" with no spaces in the middle.");
                     throw e;
                 }
-                
-                fractionCount += 1;
-                tempFrac = new Fraction(Integer.parseInt(token[0]),
-                        Integer.parseInt(token[1]));
-                
-                this.currentValue = tempFrac.toString();
+
+                try {
+                    fractionCount += 1;
+                    tempFrac = new Fraction(Integer.parseInt(token[0]),
+                            Integer.parseInt(token[1]));
+                } catch (NumberFormatException e) {
+                    System.out
+                            .println("Invalid input; a fraction needs to have a numerator and a denominator separated by a \"/\" with no spaces in the middle.");
+                    throw e;
+                }
 
             } else if (tokens[i].matches("-?\\d+")) {
-                fractionCount += 1;
-                tempFrac = new Fraction(Integer.parseInt(tokens[i]), 1);
-                
-                this.currentValue = tempFrac.toString();
+                try {
+                    fractionCount += 1;
+                    tempFrac = new Fraction(Integer.parseInt(tokens[i]), 1);
+                } catch (NumberFormatException e) {
+                    System.out
+                            .println("Invalid input; a fraction needs to have a numerator and a denominator separated by a \"/\" with no spaces in the middle.");
+                    throw e;
+                }
 
             } else if (basicOperators.contains(tokens[i])
                     && basicOperationCount == 0 && advancedOperationCount == 0) {
@@ -147,7 +155,7 @@ public class FractionCalculator {
                 return this.currentValue;
 
             } else {
-                this.currentValue = "Invalid input";
+                this.currentValue = "Invalid input; check that each fraction is followed by an operator and vice versa";
 
                 return this.currentValue;
             }
@@ -155,7 +163,7 @@ public class FractionCalculator {
             if (basicOperationCount == 1 && fractionCount == 2) {
                 basicOperationCount -= 1;
                 fractionCount -= 1;
-                
+
                 switch (currentOperation) {
 
                 case "+":
@@ -176,18 +184,18 @@ public class FractionCalculator {
 
                 }
             }
-            
-            if ((i%2 != 0) && fractionCount == 1) {
+
+            if ((i % 2 != 0) && fractionCount == 1) {
                 currentValue = tempFrac;
-                
+
             } else if (fractionCount > 1) {
                 this.currentValue = "Two consecutive fraction are not accepted; separate each fraction with an operator";
-                
+
                 return this.currentValue;
             }
             this.currentValue = currentValue.toString();
         }
-        
+
         return this.currentValue;
     }
 

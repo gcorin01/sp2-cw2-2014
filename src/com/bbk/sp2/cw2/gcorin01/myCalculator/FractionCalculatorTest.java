@@ -271,57 +271,101 @@ public class FractionCalculatorTest {
                 "testMethodEvaluateCheckFourConsecutiveFractions()", expectedResult, actualResult);
     }
 
-    // TODO Input exceptions to be added: two consecutive operators, two
-    // consecutive fractions/integers, unrecognised operator, entered only
-    // operator, entered only number
+    @Test
+    public void testMethodEvaluateCheckAdditionIntegerInputInsteadOfFraction() {
+        String currentValue = "0";
+        String userInput = "1/2 + 3";
+        String expectedResult = "7/2";
+        Fraction frac = new Fraction(0, 1);
 
-//    @Test
-//    public void testMethodCheckFractionTokenIsAFraction() {
-//        String currentValue = "0";
-//        String userInput = "3/4";
-//        Boolean validInput = false;
-//
-//        FractionCalculator calculator = new FractionCalculator(currentValue,
-//                userInput);
-//
-//        String[] userInputTokenized = calculator.inputTokenizer(userInput);
-//
-//        validInput = calculator.checkTokenValidity(userInputTokenized);
-//
-//        assertTrue("testMethodInputTokenizerThreeTokens() - unexpected value",
-//                validInput);
-//    }
+        FractionCalculator calculator = new FractionCalculator(currentValue,
+                userInput);
+        
+        String actualResult = calculator.evaluate(frac, userInput);
+        
+        assertEquals(
+                "testMethodEvaluateCheckAdditionIntegerInputInsteadOfFraction()", expectedResult, actualResult);
+    }
     
-    // @Test
-    // public void testArrayOfValidOperatorInputs() {
-    // int currentValue = "0";
-    // String userInput = "+"; // - * /
-    // Boolean validOperator = true;
-    //
-    // FractionCalculator calculator = new FractionCalculator(currentValue,
-    // userInput);
-    //
-    // String[] userInputTokenized = calculator.inputTokenizer(userInput);
-    //
-    // assertArrayEquals("testMethodInputTokenizerThreeTokens() - unexpected value",
-    // expectedResult, userInputTokenized);
-    //
-    // }
+    @Test
+    public void testMethodEvaluateCheckConsecutiveOperatorsBeforeFraction() {
+        String currentValue = "0";
+        String userInput = "- + 3";
+        String expectedResult = "Invalid input; check that each fraction is followed by an operator and vice versa";
+        Fraction frac = new Fraction(0, 1);
 
-    // @Test
-    // public void testArrayOfValidFractionInputs() {
-    // int currentValue = "0";
-    // String userInput = "";
-    // String[] expectedResult = {"3/4", "+", "1/-3"};
-    //
-    // FractionCalculator calculator = new FractionCalculator(currentValue,
-    // userInput);
-    //
-    // String[] userInputTokenized = calculator.inputTokenizer(userInput);
-    //
-    // assertArrayEquals("testMethodInputTokenizerThreeTokens() - unexpected value",
-    // expectedResult, userInputTokenized);
-    //
-    // }
+        FractionCalculator calculator = new FractionCalculator(currentValue,
+                userInput);
+        
+        String actualResult = calculator.evaluate(frac, userInput);
+        
+        assertEquals(
+                "testMethodEvaluateCheckConsecutiveOperatorsBeforeFraction()", expectedResult, actualResult);
+    }
+    
+    @Test
+    public void testMethodEvaluateCheckConsecutiveOperatorsAfterFraction() {
+        String currentValue = "0";
+        String userInput = "3 + -";
+        String expectedResult = "Invalid input; check that each fraction is followed by an operator and vice versa";
+        Fraction frac = new Fraction(0, 1);
+
+        FractionCalculator calculator = new FractionCalculator(currentValue,
+                userInput);
+        
+        String actualResult = calculator.evaluate(frac, userInput);
+        
+        assertEquals(
+                "testMethodEvaluateCheckConsecutiveOperatorsAfterFraction()", expectedResult, actualResult);
+    }
+    
+    @Test
+    public void testMethodEvaluateCheckOnlyOperators() {
+        String currentValue = "0";
+        String userInput = "a + -";
+        String expectedResult = "Invalid input; check that each fraction is followed by an operator and vice versa";
+        Fraction frac = new Fraction(0, 1);
+
+        FractionCalculator calculator = new FractionCalculator(currentValue,
+                userInput);
+        
+        String actualResult = calculator.evaluate(frac, userInput);
+        
+        assertEquals(
+                "testMethodEvaluateCheckConsecutiveOperatorsAfterFraction()", expectedResult, actualResult);
+    }
+    
+    @Test
+    public void testMethodEvaluateCheckMixedIntegerAndOperatorInOneToken() {
+        String currentValue = "0";
+        String userInput = "3+ + 1";
+        String expectedResult = "Invalid input; check that each fraction is followed by an operator and vice versa";
+        Fraction frac = new Fraction(0, 1);
+
+        FractionCalculator calculator = new FractionCalculator(currentValue,
+                userInput);
+        
+        String actualResult = calculator.evaluate(frac, userInput);
+        
+        assertEquals(
+                "testMethodEvaluateCheckMixedIntegerAndOperatorInOneToken()", expectedResult, actualResult);
+    }
+    
+    @SuppressWarnings("unused")
+    @Test(expected = NumberFormatException.class)
+    public void testMethodEvaluateCheckMixedFractionAndOperatorInOneToken() {
+        String currentValue = "0";
+        String userInput = "3/4+ + 1";
+        String expectedResult = "Invalid input; check that each fraction is followed by an operator and vice versa";
+        Fraction frac = new Fraction(0, 1);
+
+        FractionCalculator calculator = new FractionCalculator(currentValue,
+                userInput);
+        
+        String actualResult = calculator.evaluate(frac, userInput);
+    }
+    
+    
+    // TODO Input exceptions to be checked: mixture of numbers and operators in one token 
 
 }
