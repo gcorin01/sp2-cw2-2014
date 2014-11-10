@@ -63,7 +63,6 @@ public class FractionCalculator {
             String token = userInputTokenized.nextToken();
             input[i] = token;
             i++;
-            System.out.println(token);
         }
 
         return input;
@@ -173,9 +172,6 @@ public class FractionCalculator {
                     currentValue = currentValue.add(tempFrac);
                     break;
 
-                default:
-                    System.out.println("Not a valid operator");
-
                 }
                 basicOperationCount = 0;
                 fractionCount = 0;
@@ -183,13 +179,14 @@ public class FractionCalculator {
             
             if (fractionCount == 1) {
                 currentValue = tempFrac;
+                
+            } else if (fractionCount == 2) {
+                this.currentValue = "Two consecutive fraction are not accepted; separate each fraction with an operator";
+                
+                return this.currentValue;
             }
 
             this.currentValue = currentValue.toString();
-            // TODO Review code so that only one operation at the time is
-            // allowed and after the first fraction the operation needs to
-            // be done recursion may be necessary
-
         }
 
         return this.currentValue;

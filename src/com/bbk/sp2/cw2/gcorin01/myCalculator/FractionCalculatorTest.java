@@ -193,7 +193,21 @@ public class FractionCalculatorTest {
                 "testMethodEvaluateAddition()", expectedResult, actualResult);
     }
     
-    
+    @Test
+    public void testMethodEvaluateCheckTwoConsecutiveFractions() {
+        String currentValue = "0";
+        String userInput = "3/4 1/4";
+        String expectedResult = "Two consecutive fraction are not accepted; separate each fraction with an operator";
+        Fraction frac = new Fraction(0, 1);
+
+        FractionCalculator calculator = new FractionCalculator(currentValue,
+                userInput);
+        
+        String actualResult = calculator.evaluate(frac, userInput);
+        
+        assertEquals(
+                "testMethodEvaluateAddition()", expectedResult, actualResult);
+    }
 
     // TODO Input exceptions to be added: two consecutive operators, two
     // consecutive fractions/integers, unrecognised operator, entered only
