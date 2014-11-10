@@ -413,6 +413,38 @@ public class FractionCalculatorTest {
                 "testMethodEvaluateAddition()", expectedResult, actualResult);
     }
     
+    @Test
+    public void testMethodEvaluateAbsValue() {
+        String currentValue = "0";
+        String userInput = "-1/4 a";
+        String expectedResult = "1/4";
+        Fraction frac = new Fraction(0, 1);
+
+        FractionCalculator calculator = new FractionCalculator(currentValue,
+                userInput);
+        
+        String actualResult = calculator.evaluate(frac, userInput);
+        
+        assertEquals(
+                "testMethodEvaluateAbsValue()", expectedResult, actualResult);
+    }
+    
+    @Test
+    public void testMethodEvaluateNegate() {
+        String currentValue = "0";
+        String userInput = "1/4 n";
+        String expectedResult = "1/-4";
+        Fraction frac = new Fraction(0, 1);
+
+        FractionCalculator calculator = new FractionCalculator(currentValue,
+                userInput);
+        
+        String actualResult = calculator.evaluate(frac, userInput);
+        
+        assertEquals(
+                "testMethodEvaluateAbsValue()", expectedResult, actualResult);
+    }
+    
     //TODO Test strings with more than 2 fractions
 
 }
