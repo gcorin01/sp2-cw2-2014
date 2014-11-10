@@ -93,13 +93,12 @@ public class FractionCalculator {
         for (int i = 0; i < tokens.length; i++) {
             String[] token;
 
-            if (tokens[i].contains("/")) {
+            if (tokens[i].contains("/") && tokens[i].length() != 1) {
                 tokenDelimeter = "/";
                 token = inputTokenizer(tokens[i], tokenDelimeter);
 
                 try {
-                    if (token.length == 2) {
-                    }
+                    if (token.length == 2) ;
                 } catch (ArithmeticException e) {
                     System.out
                             .println("Invalid input; a fraction needs to have a numerator and a denominator separated by a \"/\" with no spaces in the middle.");
@@ -171,16 +170,32 @@ public class FractionCalculator {
                     break;
 
                 case "-":
-                    currentValue = currentValue.add(tempFrac);
+                    currentValue = currentValue.subtract(tempFrac);
                     break;
 
                 case "/":
-                    currentValue = currentValue.add(tempFrac);
+                    currentValue = currentValue.divide(tempFrac);
                     break;
 
                 case ("*"):
-                    currentValue = currentValue.add(tempFrac);
+                    currentValue = currentValue.multiply(tempFrac);
                     break;
+
+                }
+            }
+
+            if (advancedOperationCount == 1 && fractionCount == 1) {
+                advancedOperationCount -= 1;
+                fractionCount -= 1;
+
+                if (currentOperation == "a" || currentOperation == "A"
+                        || currentOperation == "abs") {
+
+                    currentValue = currentValue.absValue(tempFrac);
+
+                } else { // It's "n", "N" or "neg"
+
+                    currentValue = currentValue.negate(tempFrac);
 
                 }
             }
@@ -189,7 +204,7 @@ public class FractionCalculator {
                 currentValue = tempFrac;
 
             } else if (fractionCount > 1) {
-                this.currentValue = "Two consecutive fraction are not accepted; separate each fraction with an operator";
+                this.currentValue = "Two consecutive fraction or two consecutive operators are not accepted; separate each fraction with an operator";
 
                 return this.currentValue;
             }

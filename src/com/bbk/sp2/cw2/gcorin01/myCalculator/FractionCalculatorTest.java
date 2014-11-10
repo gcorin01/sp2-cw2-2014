@@ -365,7 +365,54 @@ public class FractionCalculatorTest {
         String actualResult = calculator.evaluate(frac, userInput);
     }
     
+    @Test
+    public void testMethodEvaluateMultiplication() {
+        String currentValue = "0";
+        String userInput = "1/4 * 1/4";
+        String expectedResult = "1/16";
+        Fraction frac = new Fraction(0, 1);
+
+        FractionCalculator calculator = new FractionCalculator(currentValue,
+                userInput);
+        
+        String actualResult = calculator.evaluate(frac, userInput);
+        
+        assertEquals(
+                "testMethodEvaluateMultiplication()", expectedResult, actualResult);
+    }
     
-    // TODO Input exceptions to be checked: mixture of numbers and operators in one token 
+    @Test
+    public void testMethodEvaluateDivision() {
+        String currentValue = "0";
+        String userInput = "1/2 / 1/4";
+        String expectedResult = "2";
+        Fraction frac = new Fraction(0, 1);
+
+        FractionCalculator calculator = new FractionCalculator(currentValue,
+                userInput);
+        
+        String actualResult = calculator.evaluate(frac, userInput);
+        
+        assertEquals(
+                "testMethodEvaluateDivision()", expectedResult, actualResult);
+    }
+    
+    @Test
+    public void testMethodEvaluateSubtraction() {
+        String currentValue = "0";
+        String userInput = "1/2 - 1/4";
+        String expectedResult = "1/4";
+        Fraction frac = new Fraction(0, 1);
+
+        FractionCalculator calculator = new FractionCalculator(currentValue,
+                userInput);
+        
+        String actualResult = calculator.evaluate(frac, userInput);
+        
+        assertEquals(
+                "testMethodEvaluateAddition()", expectedResult, actualResult);
+    }
+    
+    //TODO Test strings with more than 2 fractions
 
 }
